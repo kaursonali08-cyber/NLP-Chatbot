@@ -1,0 +1,29 @@
+.DS_Store
+.env
+.venv/
+__pycache__/
+*.py[cod]
+backend/conversa.db
+conversa.db
+backend/app/models/*.joblib
+frontend/node_modules/
+frontend/dist/
+*** Add File: backend/requirements.txt
+fastapi>=0.115,<1
+uvicorn[standard]>=0.30,<1
+sqlalchemy>=2.0,<3
+pydantic-settings>=2.4,<3
+scikit-learn>=1.5,<2
+joblib>=1.4,<2
+spacy>=3.8,<4
+httpx>=0.27,<1
+pytest>=8.3,<9
+*** Add File: backend/.env.example
+DATABASE_URL=sqlite:///./conversa.db
+OLLAMA_BASE_URL=http://localhost:11434
+OLLAMA_MODEL=llama3.2:3b
+AI_RESPONSE_TIMEOUT=20
+FRONTEND_ORIGIN=http://localhost:5173
+MAX_MESSAGE_LENGTH=2000
+CONTEXT_MESSAGE_LIMIT=10
+INTENT_CONFIDENCE_THRESHOLD=0.38

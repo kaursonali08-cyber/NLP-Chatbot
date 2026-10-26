@@ -1,0 +1,11 @@
+import axios from 'axios';
+const api = axios.create({ baseURL: import.meta.env.VITE_API_URL || 'http://localhost:8000/api', timeout: 30000 });
+export const getSessionId = () => { let id = sessionStorage.getItem('conversa-session'); if (!id) { id = crypto.randomUUID(); sessionStorage.setItem('conversa-session', id); } return id; };
+const sessionParams = () => ({ params:{session_id:getSessionId()} });
+export const listConversations = (search='') => api.get('/conversations', {params:{session_id:getSessionId(),search}});
+export const getConversation = id => api.get(`/conversations/${id}`, sessionParams());
+export const removeConversation = id => api.delete(`/conversations/${id}`, sessionParams());
+export const createConversation = () => api.post('/conversations', {session_id:getSessionId(),title:'New conversation'});
+export const sendMessage = (message, conversation_id) => api.post('/chat', {message,conversation_id,session_id:getSessionId()});
+export const analyze = text => api.get('/nlp/analyze', {params:{text}});
+export const health = () => api.get('/health');
